@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <el-row>
+    <el-button>默认按钮</el-button>
+    <el-button type="primary" @click="onHello()">主要按钮</el-button>
+    <el-button type="success" @click="onHello()">成功按钮</el-button>
+    <el-button type="info" @click="onHello()">信息按钮</el-button>
+    <el-button type="warning" @click="onHello()">警告按钮</el-button>
+    <el-button type="danger" @click="onHello()">危险按钮</el-button>
+  </el-row>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  export default {
+    name: 'HomeView',
+    data(){
+      return{
+        name: ''
+      }
+    },
+    methods:{
+      onHello(){
+        this.$axios.get("/hello").then(res =>{
+          console.log(res);
+        })
+      }  
+    },
   }
-}
 </script>
