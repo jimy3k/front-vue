@@ -1,28 +1,47 @@
 <template>
-  <el-row>
-    <el-button>默认按钮</el-button>
-    <el-button type="primary" @click="onHello()">主要按钮</el-button>
-    <el-button type="success" @click="onHello()">成功按钮</el-button>
-    <el-button type="info" @click="onHello()">信息按钮</el-button>
-    <el-button type="warning" @click="onHello()">警告按钮</el-button>
-    <el-button type="danger" @click="onHello()">危险按钮</el-button>
-  </el-row>
+  <el-table
+    :data="tableData"
+    height="250"
+    border
+    style="width: 100%">
+    <el-table-column
+      prop="id"
+      label="ID"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="age"
+      label="年龄"
+      width="180">
+    </el-table-column>
+	<el-table-column
+      prop="address"
+      label="地址">
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
   export default {
-    name: 'HomeView',
-    data(){
-      return{
-        name: ''
+    data() {
+      return {
+        tableData: []
       }
     },
-    methods:{
-      onHello(){
-        this.$axios.get("/hello").then(res =>{
-          console.log(res);
-        })
-      }  
-    },
+	created() {
+		this.getUserList();
+	},
+	methods:{
+		getUserList(){
+			this.$axios.get("/getuserlist").then(res =>{
+				this.tableData = res.data;
+			})
+		}
+	}
   }
 </script>
